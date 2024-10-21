@@ -14,8 +14,23 @@ public class GuessTheNumber {
         
         while (guess != numberToGuess) {
             System.out.print("Enter your guess: ");
-            guess = scanner.nextInt();
             
+            // Input validation loop
+            while (true) {
+                if (scanner.hasNextInt()) {
+                    guess = scanner.nextInt();
+                    if (guess < 1 || guess > 10) {
+                        System.out.println("Please guess a number between 1 and 10.");
+                    } else {
+                        break; // Valid input
+                    }
+                } else {
+                    System.out.println("That's not a valid number. Please enter an integer between 1 and 10.");
+                    scanner.next(); // Consume the invalid input
+                }
+            }
+
+            // Check the guess
             if (guess < numberToGuess) {
                 System.out.println("Too low! Try again.");
             } else if (guess > numberToGuess) {
